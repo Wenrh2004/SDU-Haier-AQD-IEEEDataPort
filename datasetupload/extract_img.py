@@ -34,14 +34,14 @@ def parse_xml(xml_file_type, extract_type):
 # To extract and save images.
 def extract_and_save_images(xml_file_path, image_file, extract_type, image_size):
     coordinates = parse_xml(xml_file_path, extract_type)
-    img_name = image_file.split()[0]  # gets the name of the current image
+    img_name = os.path.basename(image_file).split(".")[0]  # Get the file name section
     image_file = Image.open(image_file)
 
     for i, coord in enumerate(coordinates):
         cropped_image = image_file.crop(coord).resize((image_size, image_size))
 
         # Build the complete save path and file name.
-        save_directory = f'{extract_type}/'
+        save_directory = f'datasetupload/{extract_type}/'
         file_name = f"{img_name}_cropped{i + 1}.jpg"
         file_save_path = os.path.join(save_directory, file_name)  # build the full file path
 
@@ -55,13 +55,15 @@ def extract_and_save_images(xml_file_path, image_file, extract_type, image_size)
 
 if __name__ == '__main__':
     # Specify the path of the extracted file and the category of the extracted image.
-    file_path = 'trainimg/'
+    file_path = 'datasetupload/trainimg/'
     img_type = 'logo'
     img_size = 160
 
+    # Get the file path and the total number of files.
     img_files, xml_files = get_filenames_from_path(file_path)
     total_files = len(img_files)
 
+    # Extract and save the image.
     for img_file, xml_file in tqdm(zip(img_files, xml_files), total=total_files, desc="Processing"):
         xml_file = file_path + xml_file
         img_file = file_path + img_file
