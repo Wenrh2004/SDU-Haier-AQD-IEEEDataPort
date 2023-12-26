@@ -28,5 +28,5 @@ help:
 	@echo "  clean        : Clean up project"
 	@echo "  help         : Show available tasks"
 
-# 默认任务
+# Default task
 .DEFAULT_GOAL := help

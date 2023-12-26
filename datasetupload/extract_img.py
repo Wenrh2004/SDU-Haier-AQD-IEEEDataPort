@@ -57,6 +57,7 @@ if __name__ == '__main__':
     # Specify the path of the extracted file and the category of the extracted image.
     file_path = 'datasetupload/trainimg/'
     img_type = 'logo'
+    # TODO: The image size is calculated based on the data in the XML file.
     img_size = 160
 
     # Get the file path and the total number of files.
